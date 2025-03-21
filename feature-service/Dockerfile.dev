@@ -1,0 +1,19 @@
+# Use Node.js as the base image
+FROM node:18-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Copy package.json and install dependencies
+COPY package.json ./
+RUN npm install
+RUN npm install -g tsx
+
+# Copy the feature-service code
+COPY . .
+
+# Expose necessary ports
+EXPOSE 3000
+
+# Start the feature-service
+CMD ["npm", "run", "dev"]

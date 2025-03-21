@@ -1,0 +1,162 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider        = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [pg_trgm]
+}
+
+model User {
+  id              String            @id @default(uuid())
+  clerkId         String            @unique
+  emailId         String            @unique
+  firstName       String
+  lastName        String?
+  currentWeight   Float?
+  targetWeight    Float             @default(-1)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  Weight          Weight[]
+  workoutLogs     WorkoutLog[]
+  exerciseLogs    ExerciseLog[]
+  Workout         Workout[]
+  WorkoutAnalysis WorkoutAnalysis[]
+  Image           Image[]
+}
+
+model Weight {
+  id         String   @id @default(uuid())
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  value      Float
+  recordedAt DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Exercise {
+  id          String        @id @default(uuid())
+  name        String        @unique
+  workouts    Workout[]
+  tags        String[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  ExerciseLog ExerciseLog[]
+}
+
+model Set {
+  id            String      @id @default(uuid())
+  exerciseId    String
+  weightLifted  Float
+  reps          Int
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  ExerciseLog   ExerciseLog @relation(fields: [exerciseLogId], references: [id])
+  exerciseLogId String
+}
+
+model Workout {
+  id              String            @id @default(uuid())
+  user            User              @relation(fields: [userId], references: [id])
+  userId          String
+  workoutName     String
+  isFinalised     Boolean           @default(false)
+  exercises       Exercise[]
+  scheduledAt     Days[]
+  workoutAnalysis WorkoutAnalysis[]
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  WorkoutLog      WorkoutLog[]
+  DaysWorkouts    DaysWorkouts?     @relation(fields: [daysWorkoutsId], references: [id])
+  daysWorkoutsId  String?
+}
+
+model WorkoutLog {
+  id          String        @id @default(uuid())
+  startTime   DateTime      @default(now())
+  endTime     DateTime?
+  pauseTime   Int?          @default(0)
+  workout     Workout       @relation(fields: [workoutId], references: [id])
+  workoutId   String
+  analysed    Boolean       @default(false)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  User        User          @relation(fields: [userId], references: [id])
+  userId      String
+  ExerciseLog ExerciseLog[]
+  images      Image[]
+  inProgress  Boolean       @default(true)
+}
+
+model WorkoutAnalysis {
+  id                      String   @id @default(uuid())
+  User                    User     @relation(fields: [userId], references: [id])
+  userId                  String
+  totalSets               Int
+  totalReps               Int
+  totalVolume             Float
+  avgWeight               Float
+  maxWeight               Float
+  avgRepsPerSet           Float
+  progression             Float?
+  fatigueIndex            Float?
+  estimatedCaloriesBurned Int?
+  musclesTargetted        String[]
+  suggestions             String[]
+  createdAt               DateTime @default(now())
+  Workout                 Workout  @relation(fields: [workoutId], references: [id])
+  workoutId               String
+}
+
+model ExerciseLog {
+  id           String     @id @default(uuid())
+  sets         Set[]
+  duration     Int?
+  exercise     Exercise   @relation(fields: [exerciseId], references: [id])
+  exerciseId   String
+  oneRepMax    Float?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  WorkoutLog   WorkoutLog @relation(fields: [workoutLogId], references: [id])
+  workoutLogId String
+  User         User       @relation(fields: [userId], references: [id])
+  userId       String
+}
+
+model Image {
+  id           String     @id @default(uuid())
+  url          String
+  publicId     String
+  user         User       @relation(fields: [userId], references: [id])
+  userId       String
+  uploadedAt   DateTime   @default(now())
+  WorkoutLog   WorkoutLog @relation(fields: [workoutLogId], references: [id])
+  workoutLogId String
+}
+
+model DaysWorkouts {
+  id        String    @id @default(uuid())
+  index     Int       @unique
+  name      String    @unique
+  updatedAt DateTime  @updatedAt
+  workouts  Workout[]
+}
+
+enum Days {
+  Monday
+  Tuesday
+  Wednesday
+  Thursday
+  Friday
+  Saturday
+  Sunday
+}

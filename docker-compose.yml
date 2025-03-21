@@ -1,0 +1,64 @@
+services:
+  core-service:
+    image: trakkr-core-service:latest
+    container_name: core-service
+    ports:
+      - "3000:3000"
+    restart: always
+    depends_on:
+      - postgres
+      - redis
+      - rabbitmq
+    env_file:
+      - ./core-service/.env
+    networks:
+      - trakkr-network
+
+  feature-service:
+    image: feature-service:latest
+    container_name: feature-service
+    ports:
+      - "3001:3001"
+    restart: always
+    depends_on:
+      - rabbitmq
+    env_file:
+      - ./feature-service/.env
+    networks:
+      - trakkr-network
+
+  postgres:
+    image: postgres:15
+    container_name: postgres-db
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data-3
+    networks:
+      - trakkr-network
+
+  redis:
+    image: redis:alpine
+    container_name: redis-cache
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - trakkr-network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq-service
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672" # RabbitMQ UI
+    networks:
+      - trakkr-network
+
+volumes:
+  postgres-data:
+
+networks:
+  trakkr-network:

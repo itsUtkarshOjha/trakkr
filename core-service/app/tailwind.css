@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  @apply bg-white dark:bg-gray-950;
+
+  @media (prefers-color-scheme: dark) {
+    color-scheme: dark;
+  }
+}
+
+@layer base {
+  :root {
+    --background: #eef5fd;
+    --foreground: #101322;
+    --card: #ecefff;
+    --card-foreground: #1a1d2e;
+    --popover: #ffffff;
+    --popover-foreground: #111111;
+    --primary: #706c00;
+    --primary-foreground: #e0e5ff;
+    --secondary: #e0e4ff;
+    --secondary-foreground: #1a1d2e;
+    --muted: #d1d6ff;
+    --muted-foreground: #3b4252;
+    --accent: #30bdff;
+    --accent-foreground: #111111;
+    --destructive: #b91c1c;
+    --success: #22c55e;
+    --destructive-foreground: #ffffff;
+    --border: #cbd5e1;
+    --input: #cbd5e1;
+    --ring: #6b7280;
+    --chart-1: #dc2626;
+    --chart-2: #059669;
+    --chart-3: #4a3f0e;
+    --chart-4: #ac7bff;
+    --chart-5: #be185d;
+    --sidebar-background: #ddeefe;
+    --sidebar-foreground: #3b4252;
+    --sidebar-primary: #a2b9d6;
+    --sidebar-primary-foreground: #1a1d2e;
+    --sidebar-accent: #f0f1ff;
+    --sidebar-accent-foreground: #1a1d2e;
+    --sidebar-border: #cbd5e1;
+    --sidebar-ring: #2563eb;
+  }
+  .dark {
+    --background: #171526;
+    --foreground: #edf3ff;
+    --card: #11111f;
+    --card-foreground: #e5e7eb;
+    --popover: #11111f;
+    --popover-foreground: #ffffff;
+    --primary: #fceaac;
+    --primary-foreground: #1c1f30;
+    --secondary: #1a193b;
+    --secondary-foreground: #e5e7eb;
+    --muted: #1f2340;
+    --muted-foreground: #dce4ff;
+    --accent: #0ea5e9;
+    --accent-foreground: #ffffff;
+    --destructive: #b91c1c;
+    --success: #22c55e;
+    --destructive-foreground: #ffffff;
+    --border: #3f3f46;
+    --input: #3f3f46;
+    --ring: #a3a3a3;
+    --chart-1: #f87171;
+    --chart-2: #34d399;
+    --chart-3: #fbbf24;
+    --chart-4: #8b5cf6;
+    --chart-5: #ec4899;
+    --sidebar-background: #28263c;
+    --sidebar-foreground: #a2b9d6;
+    --sidebar-primary: ##acd1fc;
+    --sidebar-primary-foreground: #cdd1ff;
+    --sidebar-accent: #27272a;
+    --sidebar-accent-foreground: #d1d6ff;
+    --sidebar-border: #3f3f46;
+    --sidebar-ring: #2563eb;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+.error-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f3f4f6; /* gray-100 */
+  color: #1f2937; /* gray-900 */
+  padding: 1.5rem;
+}
+
+.error-container {
+  max-width: 32rem; /* max-w-lg */
+  width: 100%;
+  background: #ffffff; /* white */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.dark .error-page {
+  background-color: #111827; /* gray-900 */
+  color: #e5e7eb; /* gray-100 */
+}
+
+.dark .error-container {
+  background: #1f2937; /* gray-800 */
+}
+
+.error-emoji {
+  font-size: 3.75rem; /* text-6xl */
+}
+
+.error-title {
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: 600; /* font-semibold */
+  margin-top: 1rem;
+}
+
+.error-message {
+  color: #4b5563; /* gray-600 */
+  margin-top: 0.5rem;
+}
+
+.dark .error-message {
+  color: #d1d5db; /* gray-300 */
+}
+
+.error-button {
+  margin-top: 1.5rem;
+  display: inline-block;
+  background: #2563eb; /* blue-600 */
+  color: white;
+  font-weight: 500;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.5rem;
+  transition: background 0.3s;
+}
+
+.error-button:hover {
+  background: #1d4ed8; /* blue-700 */
+}
