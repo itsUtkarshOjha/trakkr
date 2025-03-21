@@ -194,7 +194,14 @@ export default function App({ appTheme, handleThemeChange }: Props) {
               {appTheme === "dark" ? <SunIcon /> : <MoonIcon />}
             </Button>
             <div className="flex items-center justify-between gap-3">
-              <UserButton />
+              <UserButton
+                appearance={{
+                  elements: {
+                    userButtonPopoverCard: { pointerEvents: "initial" },
+                  },
+                }}
+                afterSignOutUrl="/"
+              />
               <p>Your account</p>
             </div>
           </div>
