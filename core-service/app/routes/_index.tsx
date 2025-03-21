@@ -165,13 +165,11 @@ export default function Index() {
               and stay on top of your fitness journey—anytime, anywhere.
             </h3>
             <div className="flex gap-3 items-center">
-              <div className="bg-gradient-to-r text-foreground from-chart-4 to-accent rounded-xl text-sm md:text-md py-2 font-semibold px-4">
-                <SignInButton>
-                  <Button className="bg-gradient-to-r text-foreground from-chart-4 to-accent rounded-xl text-sm md:text-md py-2 font-semibold px-4">
-                    Start Now
-                  </Button>
-                </SignInButton>
-              </div>
+              <SignInButton>
+                <Button className="bg-gradient-to-r text-foreground from-chart-4 to-accent rounded-xl text-sm md:text-md py-2 font-semibold px-4">
+                  Start Now
+                </Button>
+              </SignInButton>
               <Link
                 to="/guest/dashboard"
                 className="bg-muted hover:bg-primary-foreground px-4 py-2 rounded-xl text-[12px] md:text-base font-light"
@@ -209,9 +207,12 @@ export default function Index() {
               </div>
             </div>
           ))}
-          <div className="bg-gradient-to-r text-foreground from-chart-4 to-accent rounded-xl text-sm md:text-md py-2 font-semibold px-4">
-            <SignInButton>Start Now</SignInButton>
-          </div>
+
+          <SignInButton>
+            <Button className="bg-gradient-to-r text-foreground from-chart-4 to-accent rounded-xl text-sm md:text-md py-2 font-semibold px-4">
+              Start Now
+            </Button>
+          </SignInButton>
         </div>
       </section>
       <section className="bg-muted px-12 py-4 md:py-12">
