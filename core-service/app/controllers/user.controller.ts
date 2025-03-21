@@ -46,7 +46,7 @@ export const createUser = async (clerkUser: User) => {
       html: notificationHTML,
       emailId: createdUser.emailId,
     };
-    await sendNotification(notificationBody.toString());
+    await sendNotification(JSON.stringify(notificationBody));
     return createdUser;
   } catch (error) {
     console.error(error);
