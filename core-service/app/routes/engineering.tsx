@@ -90,7 +90,7 @@ export default function Engineering() {
         <h3 className="text-2xl md:text-3xl xl:text-4xl text-primary font-medium">
           High level diagram
         </h3>
-        <img src="/hld.svg" loading="lazy" />
+        <img src="/hld-2.svg" loading="lazy" />
       </div>
       <hr className="w-1/2 mx-auto border-foreground opacity-30" />
       <div className="w-full mx-auto text-center px-8 xl:px-24 my-6 md:my-10 lg:mt-14 xl:my-24 flex flex-col gap-3 md:gap-4 lg:gap-5 xl:gap-6">
