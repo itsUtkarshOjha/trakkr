@@ -129,9 +129,11 @@ export default function Index() {
             <Link to="/engineering" className="underline hover:no-underline">
               Engineering
             </Link>
-            <div className="bg-foreground px-2 md:px-4 py-1 md:py-2 rounded-xl text-background">
-              <SignInButton />
-            </div>
+            <SignInButton>
+              <Button className="bg-foreground px-2 md:px-4 py-1 md:py-2 rounded-xl text-background">
+                Sign in
+              </Button>
+            </SignInButton>
             <Button
               variant="ghost"
               className="bg-muted hover:bg-background px-3 md:px-4 rounded-full "
@@ -164,7 +166,11 @@ export default function Index() {
             </h3>
             <div className="flex gap-3 items-center">
               <div className="bg-gradient-to-r text-foreground from-chart-4 to-accent rounded-xl text-sm md:text-md py-2 font-semibold px-4">
-                <SignInButton>Start Now</SignInButton>
+                <SignInButton>
+                  <Button className="bg-gradient-to-r text-foreground from-chart-4 to-accent rounded-xl text-sm md:text-md py-2 font-semibold px-4">
+                    Start Now
+                  </Button>
+                </SignInButton>
               </div>
               <Link
                 to="/guest/dashboard"
